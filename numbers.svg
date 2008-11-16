@@ -12,5 +12,20 @@ xmlns="http://www.w3.org/2000/svg">
 
 <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red"/>
 
+
+<script type="text/ecmascript"><![CDATA[
+
+  window.onload=start;
+
+ 
+  function start() { 
+     // Our JavaScript goes here...
+
+     alert(" hi ! from JS " ) ;
+  } 
+
+</script>
+
+
 </svg>
 
