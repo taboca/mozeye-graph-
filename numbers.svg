@@ -7,29 +7,43 @@ This is the basis to the SVG demo that displays Mozilla numbers worldwide and fr
 
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 
-<svg width="100%" height="100%" version="1.1"
-xmlns="http://www.w3.org/2000/svg">
+<svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg" id="svgbody" >
 
-<circle cx="300" cy="300" r="160" stroke="black" stroke-width="2" fill="pink"/>
-<circle cx="300" cy="300" r="130" stroke="black" stroke-width="2" fill="green"/>
-<circle cx="300" cy="300" r="70" stroke="black" stroke-width="2" fill="blue"/>
-<circle cx="300" cy="300" r="40" stroke="black" stroke-width="2" fill="red"/>
+<g id="container">
+</g>
 
 
 <script type="text/ecmascript"><![CDATA[
 
   window.onload=start;
 
- 
-  function start() { 
-     // Our JavaScript goes here...
+  var centerX = 300; 
+  var centerY = 300; 
 
-     alert(" hi ! from JS " ) ;
+  var ns ="http://www.w3.org/2000/svg"; 
+
+  function start() { 
+
+     var circles = [ { radius:50, fillcolor:"blue" }, { radius:70, fillcolor:"lightblue" }, { radius:90, fillcolor:"green" }, { radius:120, fillcolor:"yellow" }, { radius:150, fillcolor:"blue" } ] ;
+
+	for ( obj in circles ) { 
+  		a = new circle( obj.radius, obj.fillcolor); 
+ 	} 	
+
+  } 
+ 
+  function circle(radius, fillcolor) { 
+ 	var cElement = document.createElementNS( ns, "circle"); 
+        cElement.setAttributeNS(ns, "cx",centerX); 
+        cElement.setAttributeNS(ns, "cy",centerY); 
+        cElement.setAttributeNS(ns, "r", radius);
+        cElement.setAttributeNS(ns, "stroke-width", "0");
+        cElement.setAttributeNS(ns, "fill" , fillcolor );
+ 	document.getElementById("container").appendChild(cElement);
+
   } 
 
 ]]>
 </script>
-
-
 </svg>
 
