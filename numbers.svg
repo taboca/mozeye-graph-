@@ -1,16 +1,6 @@
 <?xml version="1.0" standalone="no"?>
-<!-- 
-
-This is the basis to the SVG demo that displays Mozilla numbers worldwide and from many angles. This is joint work in collaboration with Chris Hofmann at Mozilla. 
-
---> 
-
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-
 <svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg" id="svgbody" >
-
-<g id="container">
-</g>
 
 
 <script type="text/ecmascript"><![CDATA[
@@ -24,26 +14,41 @@ This is the basis to the SVG demo that displays Mozilla numbers worldwide and fr
 
   function start() { 
 
-     var circles = [ { radius:50, fillcolor:"blue" }, { radius:70, fillcolor:"lightblue" }, { radius:90, fillcolor:"green" }, { radius:120, fillcolor:"yellow" }, { radius:150, fillcolor:"blue" } ] ;
+     var circles = [ 
+		{ radius:150, fillcolor:"blue" } ,
+		{ radius:120, fillcolor:"yellow" },
+		{ radius:90, fillcolor:"green" },
+		{ radius:70, fillcolor:"lightblue" },
+	 	{ radius:50, fillcolor:"blue" }
+             ] ;
+
+ 	var cElement = document.createElementNS(ns, "circle"); 
+        cElement.setAttribute( "cx", "300" ); 
+        cElement.setAttribute( "cy", "300" ); 
+        cElement.setAttribute( "r", "50" );
+        cElement.setAttribute( "fill" , "blue"  );
+ 	document.getElementById("container").appendChild(cElement);
 
 	for ( obj in circles ) { 
-  		a = new circle( obj.radius, obj.fillcolor); 
+  		a = new circle( circles[obj].radius, circles[obj].fillcolor); 
  	} 	
 
   } 
  
   function circle(radius, fillcolor) { 
- 	var cElement = document.createElementNS( ns, "circle"); 
-        cElement.setAttributeNS(ns, "cx",centerX); 
-        cElement.setAttributeNS(ns, "cy",centerY); 
-        cElement.setAttributeNS(ns, "r", radius);
-        cElement.setAttributeNS(ns, "stroke-width", "0");
-        cElement.setAttributeNS(ns, "fill" , fillcolor );
+ 	var cElement = document.createElementNS(ns, "circle"); 
+        cElement.setAttribute( "cx",centerX); 
+        cElement.setAttribute("cy",centerY); 
+        cElement.setAttribute("r", radius);
+        cElement.setAttribute("stroke-width", "0");
+        cElement.setAttribute("fill" , fillcolor );
  	document.getElementById("container").appendChild(cElement);
 
   } 
 
 ]]>
 </script>
+<g id="container">
+</g>
 </svg>
 
