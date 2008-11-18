@@ -1,16 +1,29 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg" id="svgbody" >
+<svg width="100%" height="100%" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg" id="svgbody" >
+
+
+<defs id="definitions" >
+
+</defs>
+<g id="container">
+</g>
+
+<g id="textcontainer">
+
+</g>
 
 
 <script type="text/ecmascript"><![CDATA[
 
-  window.onload=start;
 
   var centerX = 300; 
   var centerY = 300; 
 
   var ns ="http://www.w3.org/2000/svg"; 
+  var xlinkns = "http://www.w3.org/1999/xlink";
+
+  window.onload = start; 
 
   function start() { 
 
@@ -22,16 +35,42 @@
 	 	{ radius:50, fillcolor:"blue" }
              ] ;
 
- 	var cElement = document.createElementNS(ns, "circle"); 
-        cElement.setAttribute( "cx", "300" ); 
-        cElement.setAttribute( "cy", "300" ); 
-        cElement.setAttribute( "r", "50" );
-        cElement.setAttribute( "fill" , "blue"  );
- 	document.getElementById("container").appendChild(cElement);
-
 	for ( obj in circles ) { 
   		a = new circle( circles[obj].radius, circles[obj].fillcolor); 
+  		a = new path( "path"+obj, circles[obj].radius); 
  	} 	
+
+  } 
+
+  function path(idName, radius) { 
+
+        var cElement = document.createElementNS(ns, "path");
+
+	var x1 = centerX - radius; 
+        var y1 = centerY;
+        var cx1 = parseInt( centerX - radius/2); 
+        var cy1 = centerY - radius; 
+        var cx2 = parseInt (centerX + radius/2); 
+        var cy2 = centerY - radius; 
+	var x2 = centerX + radius; 
+        var y2 = centerY;
+         
+        cElement.setAttribute("d","M"+x1+","+y1+" C"+cx1+","+cy1+" "+cx2+","+cy2+" "+x2+","+y2);
+        cElement.setAttribute("id",idName);
+        document.getElementById("definitions").appendChild(cElement);
+
+
+        var text = document.createElementNS(ns,"text");
+        text.setAttribute("color","black");
+        text.setAttribute("font-size"," 10px");
+
+        var textPath = document.createElementNS(ns, "textPath");
+        document.getElementById("textcontainer").appendChild(text);
+        text.appendChild(textPath);
+        textPath.setAttributeNS(xlinkns, "href","#"+idName);
+	textContent = document.createTextNode("Testing text goes here ");
+        textPath.appendChild(textContent);
+
 
   } 
  
@@ -48,7 +87,5 @@
 
 ]]>
 </script>
-<g id="container">
-</g>
 </svg>
 
